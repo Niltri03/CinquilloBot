@@ -40,5 +40,7 @@ public class Partida {
     }
 
 
-
+    public ArrayList<Carta> getTablero() {
+        return tablero;
+    }
 }

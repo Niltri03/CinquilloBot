@@ -5,6 +5,7 @@ public class Player {
 
     private Partida game;
     private ArrayList<Carta> mano = new ArrayList<Carta>();
+    private ArrayList<Carta> jugables = new ArrayList<Carta>();
 
     private AI patronIA;
 
@@ -28,5 +29,20 @@ public class Player {
         else{
             return patronIA.juegaCarta(mano, game);
         }
+    }
+
+    private void jugables(){
+        ArrayList<Carta> tab = game.getTablero();
+        for(int i = 0; i < tab.size(); ++i){
+
+        }
+    }
+
+    private void turno(){
+        jugables();
+        Carta jugada;
+        if(patronIA != null) jugada = jugables.get(patronIA.juegaCarta(jugables, game));
+        else;
+
     }
 }
