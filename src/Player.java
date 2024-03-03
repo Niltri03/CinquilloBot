@@ -27,7 +27,7 @@ public class Player {
             return null;
         }
         else{
-            return patronIA.juegaCarta(mano, game);
+            return mano.get(patronIA.juegaCarta(mano, game));
         }
     }
 
@@ -43,6 +43,43 @@ public class Player {
         Carta jugada;
         if(patronIA != null) jugada = jugables.get(patronIA.juegaCarta(jugables, game));
         else;
+    }
 
+    public Character calcCincos() {
+        Character c;
+        Integer ret = 0;
+        for(int i = 0; i < mano.size(); ++i){
+            Carta act = mano.get(i);
+            if(act.getNum() == 5) ret++;
+        }
+        return Integer.toString(ret).charAt(0);
+    }
+
+    public Character calcReyes(){
+        Character c;
+        Integer ret = 0;
+        for(int i = 0; i < mano.size(); ++i){
+            Carta act = mano.get(i);
+            if(act.getNum() == 10) ret++;
+        }
+        return Integer.toString(ret).charAt(0);
+    }
+
+    public Character calcOtros() {
+        Character c;
+        Integer ret = 0;
+        for(int i = 0; i < mano.size(); ++i){
+            Carta act = mano.get(i);
+            if(act.getNum() == 9 || act.getNum() == 8) ret++;
+        }
+        return Integer.toString(ret).charAt(0);
+    }
+
+    public boolean primerMove() {
+        for(int i = 0; i < mano.size(); ++i){
+            Carta c = mano.get(i);
+            if(c.getPalo() == 'O' && c.getNum() == 5) return true;
+        }
+        return false;
     }
 }

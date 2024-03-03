@@ -13,6 +13,13 @@ public class Partida {
     private ArrayList<Carta> tablero = new ArrayList<Carta>();
     private Random rand = new Random();
     private Partida(){
+        initMazo();
+    }
+
+    public void reset(){
+        initMazo();
+    }
+    private void initMazo(){
         for(int i = 1; i <= 10; ++i){
             Carta c = new Carta(i, 'O');
             mazo.add(c);
