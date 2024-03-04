@@ -4,7 +4,7 @@ public class PerfectAI implements AI {
 
 
     @Override
-    public int juegaCarta(ArrayList<Carta> mano, Partida p) {
+    public int juegaCarta(ArrayList<Carta> mano) {
         return -1;
     }
 }

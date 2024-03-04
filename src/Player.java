@@ -21,28 +21,49 @@ public class Player {
         for(int i = 0; i < 20; ++i) mano.add(game.robaCarta());
     }
 
-    public Carta juegaCarta(){
+    public Carta juegaCarta(int jugada){
         if(patronIA == null){
             //el player hace algo
             return null;
         }
         else{
-            return mano.get(patronIA.juegaCarta(mano, game));
+            Carta aux = jugables.get(jugada);
+            heJugado(aux.getNum(), aux.getPalo());
+            game.jugada(aux);
+            return aux;
         }
     }
 
     private void jugables(){
+        jugables = new ArrayList<>();
         ArrayList<Carta> tab = game.getTablero();
-        for(int i = 0; i < tab.size(); ++i){
+        for(int i = 0; i < mano.size(); ++i){
+            if (mano.get(i).getNum() == 5) jugables.add(mano.get(i));
+            else {
 
+            }
         }
     }
 
-    private void turno(){
+    private void heJugado(Integer a, Character b){
+        for(int i = 0; i < mano.size(); ++i){
+            Carta aux = mano.get(i);
+            if(aux.getPalo() == b && aux.getNum() == a){
+                mano.remove(i);
+            }
+        }
+
+    }
+
+    public int turno(){
         jugables();
         Carta jugada;
-        if(patronIA != null) jugada = jugables.get(patronIA.juegaCarta(jugables, game));
-        else;
+        if(patronIA != null) return (patronIA.juegaCarta(jugables));
+        else return -1;
+    }
+
+    public boolean done(){
+        return mano.size() == 0;
     }
 
     public Character calcCincos() {
@@ -78,7 +99,11 @@ public class Player {
     public boolean primerMove() {
         for(int i = 0; i < mano.size(); ++i){
             Carta c = mano.get(i);
-            if(c.getPalo() == 'O' && c.getNum() == 5) return true;
+            if(c.getPalo() == 'O' && c.getNum() == 5){
+                heJugado(5, 'O');
+                game.jugada(mano.get(i));
+                return true;
+            }
         }
         return false;
     }
